@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MD1-Project</title>
     <link rel="stylesheet" href="../assets/css/homepage.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
@@ -16,7 +17,8 @@
 <nav class="navigation-container">
     <div class="header">
         <div class="header-logo__left">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" alt="air-jordan" id="air-jordan"/>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png"
+                 alt="air-jordan" id="air-jordan"/>
         </div>
         <div class="header-right">
             <span class="header-right__help">Trợ giúp</span>
@@ -47,32 +49,33 @@
 
                 </ul>
             </div>
-        </div>
-        <div class="navigation-right">
-            <ul>
-                <li>
-                    <ion-icon name="search"></ion-icon>
-                </li>
-                <li>
-                    <a href="./login.html">
-                        <ion-icon name="person-outline" class="navigation-right__login"></ion-icon>
-                    </a>
-                    <ion-icon name="log-in-outline" class="navigation-right__logout"></ion-icon>
-                </li>
-                <li>
-                    <ion-icon name="heart-outline"></ion-icon>
-                </li>
-                <li class="navigation-right__cart">
-                    <ion-icon name="cart-outline" class="navigation-right__cart--icon"></ion-icon>
-                    <span class="navigation-right__cart--number">0</span>
-                </li>
-                <li class="navigation-right__mobile">
-                    <i id="bar" class="fas fa-outdent"></i>
-                </li>
-                <li class="navigation-right__admin">
-                    <span class="material-symbols-outlined">admin_panel_settings</span>
-                </li>
-            </ul>
+
+            <div class="navigation-right">
+                <ul>
+                    <li>
+                        <ion-icon name="search"></ion-icon>
+                    </li>
+                    <li>
+                        <a href="./login.html">
+                            <ion-icon name="person-outline" class="navigation-right__login"></ion-icon>
+                        </a>
+                        <ion-icon name="log-in-outline" class="navigation-right__logout"></ion-icon>
+                    </li>
+                    <li>
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </li>
+                    <li class="navigation-right__cart">
+                        <ion-icon name="cart-outline" class="navigation-right__cart--icon"></ion-icon>
+                        <span class="navigation-right__cart--number">0</span>
+                    </li>
+                    <li class="navigation-right__mobile">
+                        <i id="bar" class="fas fa-outdent"></i>
+                    </li>
+                    <li class="navigation-right__admin">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="searchProduct-container"></div>
@@ -88,7 +91,46 @@
     </div>
 </nav>
 
+<main>
+    <div class="banner-container">
+        <div class="banner-top">
+            <img class="banner-top__img" src="https://static.nike.com/a/images/f_auto/dpr_1.1,cs_srgb/w_1649,c_limit/8fdcffd8-edc9-4adb-b5b8-fcb00f41b93d/nike-just-do-it.png" alt="banner1"/>
+            <img class="banner-top__img" src="https://static.nike.com/a/images/f_auto/dpr_1.1,cs_srgb/w_1649,c_limit/b0c441b1-0d5a-43dc-96cd-3699688fb1a3/nike-just-do-it.jpg" alt="banner2"/>
+            <img class="banner-top__img" src="https://i.pinimg.com/originals/fa/45/96/fa4596ad9a9d39901eeb455ed4f74e44.jpg" alt="banner3"/>
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <div class="banner-bottom">
+            <img class="banner-image" src="https://static.nike.com/a/images/f_auto/dpr_1.1,cs_srgb/w_542,c_limit/d94bfa7e-9357-406a-a124-1940712dfa0b/nike-just-do-it.png"/>
+            <img class="banner-image" src="https://static.nike.com/a/images/f_auto/dpr_1.1,cs_srgb/w_542,c_limit/dc62b322-5c3f-4508-b21c-950683ed460f/nike-just-do-it.png"/>
+            <img class="banner-image" src="https://static.nike.com/a/images/f_auto/dpr_1.1,cs_srgb/w_542,c_limit/58359474-a0de-4329-959c-55d1652d0912/nike-just-do-it.png"/>
+        </div>
+    </div>
+    <div class="content-container"></div>
+    <ul class="list-page"></ul>
+</main>
 
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <p class="footer-left__text">Copyright © Nike Co., Ltd. All rights reserved.</p>
+            <p>Contact: +02812345678</p>
+        </div>
+        <div class="footer-right">
+            <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon name="logo-twitter"></ion-icon>
+            <ion-icon name="logo-instagram"></ion-icon>
+            <ion-icon name="logo-youtube"></ion-icon>
+            <ion-icon name="logo-tiktok"></ion-icon>
+            <ion-icon name="logo-google"></ion-icon>
+            <ion-icon name="logo-apple"></ion-icon>
+            <ion-icon name="logo-twitch"></ion-icon>
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <ion-icon name="logo-amazon"></ion-icon>
+        </div>
+    </div>
+</footer>
+<script src="../assets/js/script.js"></script>
 <!--library import-->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

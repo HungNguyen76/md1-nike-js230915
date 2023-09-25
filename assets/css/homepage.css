@@ -78,15 +78,16 @@ body {
 
 /*navigation section*/
 .navigation {
-    display: flex;
+    /*display: flex;*/
     height: 62px;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     border-bottom: 2px solid #ececec;
 }
 .navigation .navigation-left {
     display: flex;
     align-items: center;
-    padding-left: 100px;
+    justify-content: space-between;
+    padding-left: 20px;
     margin: 0 auto;
 }
 .navigation .navigation-left .navigation-left__logo img {
@@ -186,4 +187,41 @@ search iput css
 }
 /*navigation end*/
 
+
+/*Banner start */
+.banner-container .banner-top img {
+    width: 100%;
+}
+
+.banner-bottom {
+    display: flex;
+}
+.banner-image {
+    width: 100%;
+}
+/*Banner end*/
+
+/*Footer start*/
+.footer-container {
+    display: flex;
+    height: 100px;
+    background-color: #f4f4f4;
+}
+.footer-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+.footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.footer-right ion-icon {
+    cursor: pointer;
+    width: 50px;
+}
 
