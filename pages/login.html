@@ -17,7 +17,6 @@
     </div>
 </header>
 <div class="login-container">
-
     <form class="login-form" method="POST" id="form-2">
         <div class="login-form__left">
             <h2>Log in</h2>
@@ -29,8 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="password">PASSWORD</label><br/>
-                <input id="password" name="password" type="password" placeholder="Enter a valid email"
-                       class="form-control"/><br/>
+                <input id="password" name="password" type="password"  class="form-control"/><br/>
                 <span class="form-message"></span>
             </div>
             <span class="text">Password must be at least 8 characters and contain both letters and numbers.</span><br/>
@@ -40,14 +38,14 @@
             <a href="#">PRIVACY POLICY</a><br/>
             <button type="submit" class="form-submit" id="loginButton">Log in</button>
         </div>
-
+    </form>
         <div class="register-form">
             <h2>Create an account</h2>
             <p>Create an account now! You can get special services for yourself such as checking your purchase history
                 and getting member coupons. Sign up for free today!</p>
-            <button class="registerButton">Register</button>
+            <button class="registerButton" onclick="handleRegister()">Register</button>
         </div>
-    </form>
 </div>
+<script src="../assets/js/login.js"></script>
 </body>
 </html>

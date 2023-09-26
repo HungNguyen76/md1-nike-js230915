@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="../assets/css/register.css"/>
+</head>
+<body>
+<header class="header-login">
+    <div class="logo">
+        <a href="./homepage.html">
+            <img alt="logo" src="https://inkythuatso.com/uploads/images/2021/12/nike-jacket-big-logo-inkythuatso-20-10-08-13.jpg"/>
+        </a>
+    </div>
+</header>
+<form class="register-form" id="form-1" method="POST">
+    <h2>CREATE AN ACCOUNT</h2>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" placeholder="Enter a valid email" class="form-control"/><br />
+        <span class="form-message"></span>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" class="form-control"/><br />
+        <span class="form-message"></span>
+    </div>
+    <div class="form-group">
+        <label for="password_confirmation">Confirm Password</label>
+        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control"/><br />
+        <span class="form-message"></span>
+    </div>
+    <button class="form-submit">Register</button>
+</form>
+</body>
+</html>

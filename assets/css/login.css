@@ -32,6 +32,7 @@ body {
 .login-container .login-form__left {
     border-right: 1px solid #dadada;
     flex: 1;
+    width: 645px;
 }
 .login-container .login-form h2 {
     font-size: 40px;
@@ -63,7 +64,7 @@ body {
     color: #000;
     font-weight: bold;
 }
-.login-container #loginButton {
+.login-container #loginButton{
     border: none;
     background-color: #000;
     color: #fff;
@@ -84,7 +85,7 @@ body {
 .login-container .register-form p{
     margin-bottom: 10px;
 }
-.registerButton {
+.registerButton{
     border: none;
     background-color: #000;
     color: #fff;
