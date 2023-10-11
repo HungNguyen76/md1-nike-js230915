@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
             let checkUser = listUsers.find(user => {
                 return user.email === data.email && user.password === data.password
             })
-            console.log("checkUser: ", checkUser)
+
             if(checkUser) {
+                showSuccessLoginToast()
                 localStorage.setItem("checkLogin", checkUser.idUser)
                 function goToHomPage() {
                     window.location.href = "./homepage.html"

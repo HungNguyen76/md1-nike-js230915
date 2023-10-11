@@ -37,3 +37,12 @@ function showSuccessRegisterToast() {
         duration: 5000
     })
 }
+
+function showSuccessLoginToast() {
+    toast({
+        title: "Success!",
+        message: "You have successfully login!",
+        type: "success",
+        duration: 5000
+    })
+}
