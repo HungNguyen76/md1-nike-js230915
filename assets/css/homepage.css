@@ -236,8 +236,83 @@ search iput css
 .product-item {
     cursor: pointer;
 }
+
+/*Product Item Css*/
+/* Product Item CSS */
+
+.product {
+    display: flex;
+    width: 90%;
+    margin: 50px auto;
+    gap: 30px;
+}
+
+.productItem-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    gap: 20px;
+}
+
+.productItem-description {
+    flex: 1;
+}
+
+.productItem-description h2 {
+    font-size: 40px;
+}
+
+.productItem-description h3 {
+    font-size: 30px;
+}
+
+.productItem-description p {
+    margin-top: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0px;
+}
+
+.productItem-description h4 {
+    font-size: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.productItem-quantity {
+    width: 150px;
+    padding: 10px;
+}
+
+.addtocart-button {
+    margin-top: 20px;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 300px;
+}
+
+.product-idOption {
+    display: none;
+}
+
 .productItem-main-image img {
     width: 450px;
+    /* margin-left: 50px; */
+}
+
+.productItem-image-color {
+    display: flex;
+    /* margin-left: -32px; */
+}
+
+.productItem-image-color img {
+    width: 150px;
+
 }
 /*Pagination*/
 .listPage {

@@ -6,7 +6,24 @@ let listProductsStock = [
         type: "MEN",
         options: [
             {
-                src: "../assets/images/productItems/MEN/jordan-nu-retro-1-low.webp",
+                src: "../assets/images/productItems/MEN/jordan-nu-retro-1-low-purple.webp",
+                sizes: [
+                    {
+                        key: "S",
+                        stock: 10
+                    },
+                    {
+                        key: "M",
+                        stock: 10
+                    },
+                    {
+                        key: "L",
+                        stock: 10
+                    }
+                ]
+            },
+            {
+                src: "../assets/images/productItems/MEN/jordan-nu-retro-1-low-yellow.webp",
                 sizes: [
                     {
                         key: "S",
@@ -1074,45 +1091,92 @@ function checkLogout() {
 //B6. gán cho content-container = result
 
 function renderProductItem(idProduct) {
-    let listProducts = JSON.parse(localStorage.getItem("listProducts"))
-    console.log("listProducts: ", listProducts)
-    let productItem = listProducts.find(item => {
+
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"));
+    let productItem = listProducts.find((item) => {
         return item.id == idProduct
     })
-    console.log("productItem", productItem)
-        let result = `
-            <div class="product">
-                <div class="productItem-image">
-                    <div class="productItem-main-image">
-                        <img src="${productItem.img}" alt="" class="main-image"/>
-                    </div>
-                    <div class="productItem-image-color">
-                    
-                    </div>
-                    <div class="productItem-description">
-                        <h2>${productItem.name}</h2>
-                        <h3>${VND.format(productItem.price)}</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente error totam harum iste deserunt
-                            suscipit enim aliquam nihil veritatis quam minima architecto ad corporis, facere ut veniam et quas
-                            culpa.</p>
-                        <h4>Size</h4>
-                        <div>
-                            <input type="radio" id="S" value="S" name="size" class="size-option
-                            <label for="S">S</label>
-                            <input type="radio" id="S" value="S" name="size" class="size-option
-                            <label for="M">M</label>
-                            <input type="radio" id="S" value="S" name="size" class="size-option
-                            <label for="L">L</label>
-                        </div>
-                        <button class="addtoCart-button">ADD TO CART</button>
-                        <span class="stock-size-S">Size S available in stock ${productItem.options[0].sizes[0].stock}</span>
-                        <span class="stock-size-M">Size M available in stock ${productItem.options[0].sizes[1].stock}</span>
-                        <span class="stock-size-L">Size L available in stock ${productItem.options[0].sizes[2].stock}</span>
-                    </div>
+
+    let result = `
+        <div class="product">
+            <div class="productItem-image">
+                <div class="productItem-main-image">
+                <img src="${productItem.img}" alt="" class="main-image">
+            </div>
+                <div class="productItem-image-color">
+            
                 </div>
             </div>
-        `
-    document.querySelector(".content-container").style.display = "flex"
+            <div class="productItem-description">
+                <h2>${productItem.name}</h2>
+                <h3>${VND.format(productItem.price)}</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente error totam harum iste deserunt
+                suscipit enim aliquam nihil veritatis quam minima architecto ad corporis, facere ut veniam et quas
+                culpa.
+                </p>
+                <h4>Size</h4>
+                <div>
+                    <input type="radio" id="S" value="S" name="size" class="size-option">
+                    <label for="S">S</label>
+                    <br>
+                    <input type="radio" id="M" value="M" name="size" class="size-option">
+                    <label for="M">M</label>
+                    <br>
+                    <input type="radio" id="L" value="L" name="size" class="size-option">
+                    <label for="L">L</label>
+                </div>
+                <button class="addtocart-button" onclick="addToCart('${productItem.id}')">ADD TO CART</button><br>
+                <p class="product-idOption">${productItem.options[0].idOption}</p>
+                <span class="stock-size-S">Size S available in stock ${productItem.options[0].sizes[0].stock}</span><br>
+                <span class="stock-size-M">Size M available in stock ${productItem.options[0].sizes[1].stock}</span><br>
+                <span class="stock-size-L">Size L available in stock ${productItem.options[0].sizes[2].stock}</span>
+            </div>
+        </div>
+        `;
+    document.querySelector(".content-container").style.display = "flex";
     document.querySelector(".content-container").innerHTML = result;
-    document.querySelector(".banner-container").style.display = "none"
+    document.querySelector(".banner-container").style.display = "none";
+    let productItemColor = document.querySelector(".productItem-image-color");
+
+    let productColors = "";
+    for (let i = 0; i < productItem.options.length; i++) {
+
+        productColors += `
+            <img src="${productItem.options[i].src}" alt="" onclick="changeProductColor(${idProduct}, '${productItem.options[i].src}', '${productItem.options[i].idOption}')">
+        `
+    }
+    productItemColor.innerHTML = productColors;
+}
+
+function changeProductColor(idProduct, src, idOption) {
+    // console.log(idProduct);
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"));
+    let product = listProducts.find((product) => {
+        return product.id == idProduct;
+    })
+    let option = product.options.find((option) => {
+        return option.idOption == idOption;
+    })
+    document.querySelector(".main-image").src = `${src}`;
+    document.querySelector(".product-idOption").innerHTML = `${idOption}`;
+
+    document.querySelector(".stock-size-S").innerHTML = `Size S available in stock ${option.sizes[0].stock}`;
+    document.querySelector(".stock-size-M").innerHTML = `Size M available in stock ${option.sizes[1].stock}`;
+    document.querySelector(".stock-size-L").innerHTML = `Size L available in stock ${option.sizes[2].stock}`;
+}
+function changeProductColor(idProduct, src, idOption) {
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"))
+
+    //lấy được product detail
+    let product = listProducts.find(product => {
+        return product.id == idProduct
+    })
+
+    //lấy mảng options của product detail
+    let option = product.options.find(option => {
+        return option.idOption == idOption
+    })
+    console.log("option", option)
+    document.querySelector(".main-image").src = `${src}`
+    document.querySelector(".product-idOption").innerHTML = `${idOption}`
 }
