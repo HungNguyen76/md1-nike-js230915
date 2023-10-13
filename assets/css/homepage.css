@@ -135,7 +135,10 @@ body {
 .navigation-right a {
     color: #000;
 }
-
+/*Login*/
+.logout-button {
+    display: none;
+}
 /*
 search iput css
 */
@@ -233,7 +236,9 @@ search iput css
 .product-item {
     cursor: pointer;
 }
-
+.productItem-main-image img {
+    width: 450px;
+}
 /*Pagination*/
 .listPage {
     padding: 10px;

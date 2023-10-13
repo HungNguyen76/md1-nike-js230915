@@ -908,7 +908,7 @@ function renderListProduct(params) {
     let result = ""
     for (let i = 0; i < params.length; i++) {
         result += `
-         <div class="product-item">
+         <div class="product-item" onclick="renderProductItem('${params[i].id}')">
             <div class="product-image">
                 <img src="${params[i].img}" alt="product1"/>
             </div>
@@ -1035,4 +1035,84 @@ function pagination() {
     }
     window.changePage = changePage
 
+}
+
+//Hàm kiểm tra xem đã đăng nhập hay chưa
+/*
+* 1. tạo hàm checkLogin, getItem checkLogin gán vào 1 biến
+* 2. check nếu biến đó có null hay ko , nêu null thì trả về false, còn ko thì trả về true
+* 3. check nếu checkLogin() trả về true thì gọi "login-button" style display = none và logout-button style block
+* */
+if(checkLogin()) {
+    document.querySelector(".login-button").style.display = "none"
+    document.querySelector(".logout-button").style.display = "block"
+}
+function checkLogin() {
+    var getIsLogin = localStorage.getItem("checkLogin")
+
+    if(getIsLogin == null) {
+        return false
+    } else {
+        return true
+    }
+}
+function checkLogout() {
+    let confirmLogout = confirm("Bạn có muốn thoát không?")
+    if(confirmLogout) {
+        localStorage.removeItem("checkLogin")
+        window.location.href = "homepage.html"
+        document.querySelector(".logout-button").style.display = "none"
+    }
+}
+
+
+//B1. Tao hàm renderProductItem(idProduct)
+//B2. getItem để lấy đươc danh sách "listProducts" trong localstorage
+//B3. lăp mảng listProducts để lấy sản phẩm chi tiết thông qua id
+//B4. render ra sản phẩm chi tiết , bao gồm image, color, name, price, description và gán cộng dồn cho result
+//B5. style lại cho content-container = flex
+//B6. gán cho content-container = result
+
+function renderProductItem(idProduct) {
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"))
+    console.log("listProducts: ", listProducts)
+    let productItem = listProducts.find(item => {
+        return item.id == idProduct
+    })
+    console.log("productItem", productItem)
+        let result = `
+            <div class="product">
+                <div class="productItem-image">
+                    <div class="productItem-main-image">
+                        <img src="${productItem.img}" alt="" class="main-image"/>
+                    </div>
+                    <div class="productItem-image-color">
+                    
+                    </div>
+                    <div class="productItem-description">
+                        <h2>${productItem.name}</h2>
+                        <h3>${VND.format(productItem.price)}</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente error totam harum iste deserunt
+                            suscipit enim aliquam nihil veritatis quam minima architecto ad corporis, facere ut veniam et quas
+                            culpa.</p>
+                        <h4>Size</h4>
+                        <div>
+                            <input type="radio" id="S" value="S" name="size" class="size-option
+                            <label for="S">S</label>
+                            <input type="radio" id="S" value="S" name="size" class="size-option
+                            <label for="M">M</label>
+                            <input type="radio" id="S" value="S" name="size" class="size-option
+                            <label for="L">L</label>
+                        </div>
+                        <button class="addtoCart-button">ADD TO CART</button>
+                        <span class="stock-size-S">Size S available in stock ${productItem.options[0].sizes[0].stock}</span>
+                        <span class="stock-size-M">Size M available in stock ${productItem.options[0].sizes[1].stock}</span>
+                        <span class="stock-size-L">Size L available in stock ${productItem.options[0].sizes[2].stock}</span>
+                    </div>
+                </div>
+            </div>
+        `
+    document.querySelector(".content-container").style.display = "flex"
+    document.querySelector(".content-container").innerHTML = result;
+    document.querySelector(".banner-container").style.display = "none"
 }
