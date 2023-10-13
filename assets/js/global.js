@@ -1136,6 +1136,7 @@ function renderProductItem(idProduct) {
     document.querySelector(".content-container").style.display = "flex";
     document.querySelector(".content-container").innerHTML = result;
     document.querySelector(".banner-container").style.display = "none";
+    document.querySelector(".listPage").style.display = "none"
     let productItemColor = document.querySelector(".productItem-image-color");
 
     let productColors = "";
