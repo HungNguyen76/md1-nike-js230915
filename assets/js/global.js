@@ -1181,3 +1181,52 @@ function changeProductColor(idProduct, src, idOption) {
     document.querySelector(".main-image").src = `${src}`
     document.querySelector(".product-idOption").innerHTML = `${idOption}`
 }
+
+//Hàm hiển thị danh sách sản phẩm trong giỏ hàng
+function showCartProducts() {
+    document.querySelector(".cartProducts-container").style.display = "block"
+    document.querySelector(".navigation-container").style.opacity = 0.5;
+    document.querySelector(".content-container").style.opacity = 0.5;
+    document.querySelector(".banner-container").style.opacity = 0.5;
+
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
+    let checkLogin = localStorage.getItem("checkLogin")
+
+    let user = listUsers.find(user => {
+        return user.idUser == checkLogin
+    })
+    console.log("user", user)
+    let cartUser = user.cartUser;
+
+    let result = ""
+    // for (let i = 0; i < cartUser.length; i++) {
+        result += `
+        <div class="cartProductItem">
+            <div class="cartItem">
+                <div class="cartProductItem-image">
+                    <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/195382b3-7ff3-4b51-98e6-74f1a3f9f186/jordan-nu-retro-1-low-shoes-8294mJ.png" alt=""/>
+                </div>
+                <div class="cartProductItem-info">
+                    <h4>Air Jordan 1</h4>
+                    <p>Product code: 123456789</p>
+                    <p>Size: S</p>
+                    <p>4.000.000 đ</p>
+                    <div class="changeQuantity-button">
+                        <button>
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
+                            <span class="productItem-quantity" id="quantity">0</span>
+                        <button>
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
+                    </div>
+                </div>  
+            </div>
+            <div class="cartItem-delete-button">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+        </div>   
+        `
+    // }
+    document.querySelector(".cartProductItems").innerHTML = result
+}

@@ -65,7 +65,7 @@
                         <ion-icon name="heart-outline"></ion-icon>
                     </li>
                     <li class="navigation-right__cart">
-                        <ion-icon name="cart-outline" class="navigation-right__cart--icon"></ion-icon>
+                        <ion-icon name="cart-outline" onclick="showCartProducts()" class="navigation-right__cart--icon"></ion-icon>
                         <span class="navigation-right__cart--number">0</span>
                     </li>
                     <li class="navigation-right__mobile">
@@ -116,6 +116,29 @@
 
 </ul>
 
+<!--Layout for cart-->
+<div class="cartProducts-container">
+    <!--cart header => SHOPPING-->
+    <div class="cartProducts-header">
+        <div class="title">SHOPPING CART</div>
+        <div class="cartProducts-close">
+            <span class="material-symbols-outlined">close</span>
+        </div>
+    </div>
+    <!--thẻ div chưa cartProductItems-->
+    <div class="cartProductItems">
+
+    </div>
+    <div class="cartProducts-subTotal">
+
+    </div>
+
+    <div class="cartProducts-button">
+        <button class="cartProducts-continue-btn">CONTINUE SHOPPING</button>
+        <button class="cartProducts-checkout-btn">CHECKOUT</button>
+    </div>
+</div>
+<div id="toast"></div>
 <footer>
     <div class="footer-container">
         <div class="footer-left">
