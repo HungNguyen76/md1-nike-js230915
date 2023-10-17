@@ -1183,50 +1183,131 @@ function changeProductColor(idProduct, src, idOption) {
 }
 
 //Hàm hiển thị danh sách sản phẩm trong giỏ hàng
+
+
+function addToCart(idProduct) {
+    let checkLogin = localStorage.getItem("checkLogin");
+
+    if (checkLogin == null) {
+        // showErrorNotLoginToast();
+        return;
+    }
+
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"));
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"));
+    let selectedSize = null;
+    let idOption = document.querySelector(".product-idOption").innerHTML;
+
+    const sizeOptions = document.querySelectorAll(".size-option");
+    for (let i = 0; i < sizeOptions.length; i++) {
+        if (sizeOptions[i].checked) {
+            selectedSize = sizeOptions[i].value;
+            break;
+        }
+    }
+
+    if (selectedSize === null) {
+        // showErrorSizeToast();
+        return;
+    }
+
+    let product = listProducts.find((product) => {
+        return product.id == idProduct;
+    });
+
+    let option = product.options.find((x) => {
+        return x.idOption == idOption
+    })
+
+    let imageLink = option.src;
+    let productName = product.name;
+    let productPrice = product.price;
+
+    for (let i = 0; i < listUsers.length; i++) {
+        if (listUsers[i].idUser == checkLogin) {
+            let cart = listUsers[i].cartUser;
+
+            // Check if the product with the same idOption and selectedSize already exists in the cart
+            let existingProduct = cart.find((item) => {
+                return item.idOption == idOption && item.size == selectedSize;
+            });
+
+            if (existingProduct) {
+                // Increment the quantity if the product already exists
+                existingProduct.quantity++;
+                localStorage.setItem("listUsers", JSON.stringify(listUsers));
+
+            } else {
+                // Add the product to the cart with quantity 1, image link, and product name
+                cart.push({
+                    idProduct: idProduct,
+                    idOption: idOption,
+                    size: selectedSize,
+                    quantity: 1,
+                    imageLink: imageLink,
+                    productName: productName,
+                    productPrice: productPrice
+                });
+                localStorage.setItem("listUsers", JSON.stringify(listUsers));
+
+            }
+        }
+    }
+}
+
+
 function showCartProducts() {
-    document.querySelector(".cartProducts-container").style.display = "block"
+    document.querySelector(".cartProducts-container").style.display = "block";
     document.querySelector(".navigation-container").style.opacity = 0.5;
     document.querySelector(".content-container").style.opacity = 0.5;
     document.querySelector(".banner-container").style.opacity = 0.5;
 
-    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
-    let checkLogin = localStorage.getItem("checkLogin")
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"));
+    let checkLogin = localStorage.getItem("checkLogin");
 
-    let user = listUsers.find(user => {
-        return user.idUser == checkLogin
+    let user = listUsers.find((user) => {
+        return user.idUser == checkLogin;
     })
-    console.log("user", user)
+
     let cartUser = user.cartUser;
 
-    let result = ""
-    // for (let i = 0; i < cartUser.length; i++) {
+    let result = "";
+    for (let i = 0; i < cartUser.length; i++) {
         result += `
-        <div class="cartProductItem">
-            <div class="cartItem">
-                <div class="cartProductItem-image">
-                    <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/195382b3-7ff3-4b51-98e6-74f1a3f9f186/jordan-nu-retro-1-low-shoes-8294mJ.png" alt=""/>
-                </div>
-                <div class="cartProductItem-info">
-                    <h4>Air Jordan 1</h4>
-                    <p>Product code: 123456789</p>
-                    <p>Size: S</p>
-                    <p>4.000.000 đ</p>
-                    <div class="changeQuantity-button">
-                        <button>
-                            <span class="material-symbols-outlined">remove</span>
-                        </button>
-                            <span class="productItem-quantity" id="quantity">0</span>
-                        <button>
-                            <span class="material-symbols-outlined">add</span>
-                        </button>
+            <div class="cartProductItem" id = "cartProductItem_${i}">
+                <div class="cartItem">
+                    <div class="cartProductItem-image">
+                        <img src="${cartUser[i].imageLink}" alt="">
                     </div>
-                </div>  
+                    <div class="cartProductItem-info">
+                        <h4>${cartUser[i].productName}</h4>
+                        <p>Product code: ${cartUser[i].idOption}</p>
+                        <p>Size: ${cartUser[i].size}</p>
+                        <p>${USDollar.format(cartUser[i].productPrice)}</p>
+                            <div class="changeQuantity-button">
+                                <button>
+                                    <span class="material-symbols-outlined">
+                                        remove
+                                    </span>
+                                </button>
+                                
+                                <span class="productItem-quantity" id="quantity">${cartUser[i].quantity}</span>
+
+                                <button>
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                </button>
+                            </div>
+                    </div>
+                </div>
+                <div class="cartItem-delete-button">
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                </div>
             </div>
-            <div class="cartItem-delete-button">
-                <span class="material-symbols-outlined">close</span>
-            </div>
-        </div>   
-        `
-    // }
-    document.querySelector(".cartProductItems").innerHTML = result
+        `;
+    }
+    document.querySelector(".cartProductItems").innerHTML = result;
 }
