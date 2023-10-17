@@ -1150,7 +1150,7 @@ function renderProductItem(idProduct) {
 }
 
 function changeProductColor(idProduct, src, idOption) {
-    // console.log(idProduct);
+
     let listProducts = JSON.parse(localStorage.getItem("listProducts"));
     let product = listProducts.find((product) => {
         return product.id == idProduct;
@@ -1165,31 +1165,13 @@ function changeProductColor(idProduct, src, idOption) {
     document.querySelector(".stock-size-M").innerHTML = `Size M available in stock ${option.sizes[1].stock}`;
     document.querySelector(".stock-size-L").innerHTML = `Size L available in stock ${option.sizes[2].stock}`;
 }
-function changeProductColor(idProduct, src, idOption) {
-    let listProducts = JSON.parse(localStorage.getItem("listProducts"))
-
-    //lấy được product detail
-    let product = listProducts.find(product => {
-        return product.id == idProduct
-    })
-
-    //lấy mảng options của product detail
-    let option = product.options.find(option => {
-        return option.idOption == idOption
-    })
-    console.log("option", option)
-    document.querySelector(".main-image").src = `${src}`
-    document.querySelector(".product-idOption").innerHTML = `${idOption}`
-}
 
 //Hàm hiển thị danh sách sản phẩm trong giỏ hàng
-
-
 function addToCart(idProduct) {
     let checkLogin = localStorage.getItem("checkLogin");
 
     if (checkLogin == null) {
-        // showErrorNotLoginToast();
+        showErrorNotLoginToast();
         return;
     }
 
@@ -1207,7 +1189,7 @@ function addToCart(idProduct) {
     }
 
     if (selectedSize === null) {
-        // showErrorSizeToast();
+        showErrorSizeToast();
         return;
     }
 
@@ -1236,7 +1218,7 @@ function addToCart(idProduct) {
                 // Increment the quantity if the product already exists
                 existingProduct.quantity++;
                 localStorage.setItem("listUsers", JSON.stringify(listUsers));
-
+                showCartProductTotal()
             } else {
                 // Add the product to the cart with quantity 1, image link, and product name
                 cart.push({
@@ -1249,7 +1231,7 @@ function addToCart(idProduct) {
                     productPrice: productPrice
                 });
                 localStorage.setItem("listUsers", JSON.stringify(listUsers));
-
+                showCartProductTotal()
             }
         }
     }
@@ -1269,7 +1251,7 @@ function showCartProducts() {
         return user.idUser == checkLogin;
     })
 
-    let cartUser = user.cartUser;
+    let cartUser = user ? user.cartUser : [];
 
     let result = "";
     for (let i = 0; i < cartUser.length; i++) {
@@ -1311,3 +1293,30 @@ function showCartProducts() {
     }
     document.querySelector(".cartProductItems").innerHTML = result;
 }
+
+function showCartProductTotal() {
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"));
+    let checkLogin = localStorage.getItem("checkLogin");
+
+    let user = listUsers.find((item) => {
+        return item.idUser == checkLogin;
+    })
+
+    let cartUser = user ? user.cartUser : []
+
+    let total = cartUser.reduce((total, currentValue) => {
+        console.log("currentValue", currentValue)
+        return total += currentValue.quantity;
+    }, 0)
+
+    document.querySelector(".navigation-right__cart--number").innerHTML = `${total}`;
+}
+
+showCartProductTotal();
+
+document.querySelector(".cartProducts-close").addEventListener("click", () => {
+    document.querySelector(".cartProducts-container").style.display = "none"
+    document.querySelector(".navigation-container").style.opacity = 1
+    document.querySelector(".content-container").style.opacity = 1
+    document.querySelector(".banner-container").style.opacity =1
+})

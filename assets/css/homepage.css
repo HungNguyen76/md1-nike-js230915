@@ -409,7 +409,19 @@ search iput css
     flex: 1;
     cursor: pointer;
 }
+.size {
+    border: 1px solid red;
+    color: red;
+}
 
+.product-size {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.material-symbols-outlined {
+    cursor: pointer;
+}
 /*Footer start*/
 .footer-container {
     display: flex;
