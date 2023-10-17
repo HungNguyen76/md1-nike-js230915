@@ -369,6 +369,10 @@ search iput css
     flex: 1;
     padding: 10px;
 }
+.cartProducts-subTotal {
+    padding: 15px;
+    border-bottom: 1px solid #f5f5f5;
+}
 .cartProductItems {
     padding: 20px;
     border-bottom: 1px solid #f5f5f5;

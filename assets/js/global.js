@@ -1284,7 +1284,7 @@ function showCartProducts() {
                     </div>
                 </div>
                 <div class="cartItem-delete-button">
-                        <span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined" onclick="deleteProductItem(${i})">
                             close
                         </span>
                 </div>
@@ -1292,6 +1292,7 @@ function showCartProducts() {
         `;
     }
     document.querySelector(".cartProductItems").innerHTML = result;
+    calculateTotalProductPrice()
 }
 
 function showCartProductTotal() {
@@ -1320,3 +1321,29 @@ document.querySelector(".cartProducts-close").addEventListener("click", () => {
     document.querySelector(".content-container").style.opacity = 1
     document.querySelector(".banner-container").style.opacity =1
 })
+
+function calculateTotalProductPrice() {
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
+    let checkLogin = localStorage.getItem("checkLogin")
+    let user = listUsers.find(item => item.idUser == checkLogin)
+
+    let cartUser = user ? user.cartUser : []
+
+    let totalPrice = cartUser.reduce((total, currentValue) => {
+        return total += currentValue.productPrice * currentValue.quantity
+    },0)
+
+    document.querySelector(".cartProducts-subTotal").innerHTML = `SUBTOTAL: ${VND.format(totalPrice)}`
+}
+
+function deleteProductItem(index) {
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
+    let checkLogin = localStorage.getItem("checkLogin")
+    let user = listUsers.find(item => item.idUser == checkLogin)
+    let cartUser = user ? user.cartUser : []
+    cartUser.splice(index, 1)
+    localStorage.setItem("listUsers", JSON.stringify(listUsers))
+    showCartProducts()
+    showCartProductTotal()
+    calculateTotalProductPrice()
+}
