@@ -973,33 +973,6 @@ function renderWomenListProduct() {
     document.querySelector(".listPage").style.display = "none"
 }
 
-//B1. Tạo hàm phân trang (pagination)
-//B2. khởi tạo biến thisPage (trang hiện tại), biến limit (number), biên list (querySelectorAll(".product-item"))
-//B3. tạo hàm loadItem(): chứa 2 biến beginGet (limit * (thisPage -1)), endGet (limit * thisPage - 1)
-//B3.1 vòng lặp for mảng list (forEach nhận vào 2 tham số) bên trong vòng lặp check if (key >= beginGet && key <= endGet)
-//B3.1 => item.style.display = "block" còn không thì none và gọi hàm listPage()
-//B4 tạo hàm listPage(), tạo biến count =  độ dài của mảng list / limit và được làm tròn lên
-//B4.1 check nếu thisPage != 1
-  //B4.1.1 tạo biến prev = document.createElement('li')
-  //B4.1.2 tạo nội dung innerText cho biến prev gán = 'PREV'
-  //B4.1.3 setAttribute cho prev sự kiện 'onclick', value là "changePage(" + (thisPage - 1) + ")"
-  //B4.1.4 appendChild(prev) cho class ".listPage"
-//B4.2 vòng lặp for mảng count
-   //B4.2.1 tạo biên newPage = createElement("li")
-   //B4.2.2 gán newPage.innerText = i
-   //B4.2.3 check nếu i == thisPage thì thêm classList ('active')
-   //B4.2.4 setAttribute cho newPage sự kiện onclick , giá trị là hàm "changePage(" + (thisPage + 1) + ")"
-   //B4.2.5 querySelector class .listPage để appendChild(newPage)
-//B4.3 check nếu thisPage khác count thì
-   //B4.3.1 tạo bién next, gán thêm phần tử "li"
-   //B4.3.2 next.innerText = 'NEXT'
-   //B4.3.3 setAttribute cho next sự kiện onclick hàm "changePage(" + (thisPage + 1) + ")"
-   //B4.3.4 querySelector listPage để appendChild(next)
-
-//B5 tạo hàm changePage(i) xử lý gán thisPage = i
-//B5.1 gọi hàm loadItem()
-//B6 đính kèm hàm changePage vào global object -> window.changePage = changePage
-
 //ham phan trang
 function pagination() {
     let thisPage = 1;
@@ -1054,12 +1027,6 @@ function pagination() {
 
 }
 
-//Hàm kiểm tra xem đã đăng nhập hay chưa
-/*
-* 1. tạo hàm checkLogin, getItem checkLogin gán vào 1 biến
-* 2. check nếu biến đó có null hay ko , nêu null thì trả về false, còn ko thì trả về true
-* 3. check nếu checkLogin() trả về true thì gọi "login-button" style display = none và logout-button style block
-* */
 if(checkLogin()) {
     document.querySelector(".login-button").style.display = "none"
     document.querySelector(".logout-button").style.display = "block"
@@ -1083,13 +1050,6 @@ function checkLogout() {
 }
 
 
-//B1. Tao hàm renderProductItem(idProduct)
-//B2. getItem để lấy đươc danh sách "listProducts" trong localstorage
-//B3. lăp mảng listProducts để lấy sản phẩm chi tiết thông qua id
-//B4. render ra sản phẩm chi tiết , bao gồm image, color, name, price, description và gán cộng dồn cho result
-//B5. style lại cho content-container = flex
-//B6. gán cho content-container = result
-
 function renderProductItem(idProduct) {
 
     let listProducts = JSON.parse(localStorage.getItem("listProducts"));
@@ -1101,8 +1061,8 @@ function renderProductItem(idProduct) {
         <div class="product">
             <div class="productItem-image">
                 <div class="productItem-main-image">
-                <img src="${productItem.img}" alt="" class="main-image">
-            </div>
+                    <img src="${productItem.img}" alt="" class="main-image">
+                </div>
                 <div class="productItem-image-color">
             
                 </div>
@@ -1232,6 +1192,7 @@ function addToCart(idProduct) {
                 });
                 localStorage.setItem("listUsers", JSON.stringify(listUsers));
                 showCartProductTotal()
+
             }
         }
     }
@@ -1268,7 +1229,7 @@ function showCartProducts() {
                         <p>${USDollar.format(cartUser[i].productPrice)}</p>
                             <div class="changeQuantity-button">
                                 <button>
-                                    <span class="material-symbols-outlined">
+                                    <span class="material-symbols-outlined" onclick="decreaseItem(${i})">
                                         remove
                                     </span>
                                 </button>
@@ -1276,7 +1237,7 @@ function showCartProducts() {
                                 <span class="productItem-quantity" id="quantity">${cartUser[i].quantity}</span>
 
                                 <button>
-                                    <span class="material-symbols-outlined">
+                                    <span class="material-symbols-outlined" onclick="increaseItem(${i})">
                                         add
                                     </span>
                                 </button>
@@ -1346,4 +1307,56 @@ function deleteProductItem(index) {
     showCartProducts()
     showCartProductTotal()
     calculateTotalProductPrice()
+}
+function decreaseItem(index) {
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
+    let checkLogin = localStorage.getItem("checkLogin")
+    for (let i = 0; i < listUsers.length; i++) {
+        //kiểm tra người dùng vừa đăng nhập
+        if(listUsers[i].idUser == checkLogin) {
+            //lấy giỏ hàng của user vừa đăng nhập
+            let cartUser = listUsers[i].cartUser
+            for (let j = 0; j < cartUser.length; j++) {
+                //nếu quantity > 1, thì giảm quantity - 1
+                if(cartUser[index].quantity > 1) {
+                    cartUser[index].quantity -= 1;
+                    localStorage.setItem("listUsers", JSON.stringify(listUsers))
+                    showCartProducts();
+                    showCartProductTotal()
+                    calculateTotalProductPrice()
+                    return
+                } else {
+                    //nếu user giảm quantity dưới 1, thì xoá cart item
+                    cartUser.splice(index, 1)
+                    localStorage.setItem("listUsers", JSON.stringify(listUsers))
+                    showCartProducts()
+                    showCartProductTotal()
+                    calculateTotalProductPrice()
+                    return
+                }
+            }
+        }
+    }
+}
+function increaseItem(index) {
+    let listUsers = JSON.parse(localStorage.getItem("listUsers"))
+    let checkLogin = localStorage.getItem("checkLogin")
+    for (let i = 0; i < listUsers.length; i++) {
+        //kiểm tra người dùng vừa đăng nhập
+        if(listUsers[i].idUser == checkLogin) {
+            //lấy giỏ hàng của user vừa đăng nhập
+            let cartUser = listUsers[i].cartUser
+            for (let j = 0; j < cartUser.length; j++) {
+                //lấy được cart item và tăng quantity lên 1
+                if(j == index) {
+                    cartUser[j].quantity += 1;
+                    localStorage.setItem("listUsers", JSON.stringify(listUsers))
+                    showCartProducts();
+                    showCartProductTotal()
+                    calculateTotalProductPrice()
+                    return
+                }
+            }
+        }
+    }
 }
