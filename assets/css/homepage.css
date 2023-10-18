@@ -425,6 +425,64 @@ search iput css
 .material-symbols-outlined {
     cursor: pointer;
 }
+
+/* Search Input Product */
+
+.searchProduct-container {
+    /* display: grid; */
+    /* grid-template-columns: 250px 250px 250px 250px; */
+    /* width: 1037px; */
+    display: flex;
+    flex-wrap: wrap;
+    width: 71%;
+    margin: 0 auto;
+    border: 1px solid #ececec;
+    border-top: none;
+    gap: 10px;
+    position: absolute;
+    top: 110px;
+    left: 165px;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999999;
+}
+
+.seacrh-ProductItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.seacrh-ProductItem-image img {
+    width: 100px;
+    height: 120px;
+}
+
+.seacrh-ProductItem-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.seacrh-ProductItem-info h4 {
+    font-size: 10px;
+    margin-bottom: 5px;
+    width: 60%;
+    width: 150px;
+    text-align: center;
+}
+
+.seacrh-ProductItem-info p {
+    /* margin-left: 50px; */
+}
+
+
 /*Footer start*/
 .footer-container {
     display: flex;

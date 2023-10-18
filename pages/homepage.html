@@ -58,7 +58,7 @@
             <div class="navigation-right">
                 <ul>
                     <li>
-                        <ion-icon name="search"></ion-icon>
+                        <ion-icon name="search" onclick="searchProduct()"></ion-icon>
                     </li>
                     <li>
                         <a href="./login.html">
@@ -86,11 +86,11 @@
     </div>
     <div class="searchProduct-container"></div>
     <div class="search-input">
-        <input class="search-input__product" type="text" placeholder="Tìm kiếm theo từ khoá"/>
+        <input class="search-input__product" type="text" placeholder="Tìm kiếm theo từ khoá" oninput="searchInputProduct()"/>
         <div class="search-input__open">
             <ion-icon name="search-outline"></ion-icon>
         </div>
-        <div class="search-input__close">
+        <div class="search-input__close" onclick="closeSearchProduct()">
             <ion-icon name="close-sharp"></ion-icon>
         </div>
         <ion-icon name="close-sharp" class="search-input__delete"></ion-icon>

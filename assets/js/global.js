@@ -1360,3 +1360,60 @@ function increaseItem(index) {
         }
     }
 }
+
+function searchProduct() {
+    document.querySelector(".search-input").style.visibility = "visible"
+}
+
+function closeSearchProduct() {
+    document.querySelector(".search-input").style.visibility = "hidden"
+}
+function deleteSearchInput() {
+    document.querySelector(".search-input__product").value = "";
+    document.querySelector(".searchProduct-container").innerHTML = "";
+    document.querySelector(".content-container").style.opacity = 1;
+}
+function searchInputProduct() {
+    let listProducts = JSON.parse(localStorage.getItem("listProducts"))
+    let valueSearchInput = document.querySelector(".search-input__product").value;
+    console.log("valueSearchInput", valueSearchInput)
+    let resultSearch = []
+
+    let userSearch = listProducts.filter(item => {
+        return item.name.toUpperCase().includes(valueSearchInput.toUpperCase())
+    })
+    renderSearchInputProduct(userSearch)
+}
+
+function renderSearchInputProduct(params) {
+    console.log("params: ", params)
+    let result = ""
+    for (let i = 0; i < params.length; i++) {
+        result += `
+            <div class="seacrh-ProductItem"  onclick="renderProductItem('${params[i].id}')">
+                <div class="seacrh-ProductItem-image">
+                    <img src="${params[i].img}" alt="" />
+                </div>
+                <div class="seacrh-ProductItem-info">
+                    <h4>${params[i].name}</h4>
+                    <p>${VND.format(params[i].price)}</p>
+                </div>
+            </div>
+        `
+    }
+    document.querySelector(".searchProduct-container").innerHTML = result
+    document.querySelector(".content-container").style.opacity = 0.5
+}
+function clearSearchResults() {
+    document.querySelector(".searchProduct-container").innerHTML = "";
+}
+// Hàm xử lí khi người dùng xoá hết dữ liệu trong ô input thì ẩn vùng hiển thị sản phẩm người dùng đã tìm kiếm
+document.querySelector(".search-input__product").addEventListener("input", handleInputClear);
+function handleInputClear() {
+    let valueInputSearch = document.querySelector(".search-input__product").value;
+
+    if (valueInputSearch === "") {
+        clearSearchResults();
+        document.querySelector(".content-container").style.opacity = 1;
+    }
+}
